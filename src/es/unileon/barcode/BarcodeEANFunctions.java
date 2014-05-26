@@ -15,7 +15,7 @@ public class BarcodeEANFunctions {
     public static char getControlDigit(String barcode){
         int result=0;
         for(int i=0; i<barcode.length(); i++){
-            if(((i+1)/2)*2==i+1){
+            if((i+1)%2==0){
                 result+=3*Integer.parseInt(Character.toString(barcode.charAt(i)));
             }else{
                 result+=Integer.parseInt(Character.toString(barcode.charAt(i)));
