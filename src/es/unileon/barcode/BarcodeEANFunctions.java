@@ -27,12 +27,41 @@ public class BarcodeEANFunctions {
         return Integer.toString(result).charAt(0);
     }
     
-    public static boolean isSecuenceValid(String barcode){
+    public static boolean isSecuenceValid(String barcode) throws InvalidBarcodeException{
         boolean result= false;
+        if(!isNumber(barcode)){
+            throw new InvalidBarcodeException();
+        }
+        if(barcode.length()==13){
+           int control=0;
+           for(int i=0; i<barcode.length();i++){
+            if((i+1)%2==0){
+                control+=3*Integer.parseInt(Character.toString(barcode.charAt(i)));
+            }else{
+                control+=Integer.parseInt(Character.toString(barcode.charAt(i)));
+            }
+           }
+           if(control%10==0)
+               result=true;
+        }
         return result;
     }
     
     public static char calculateDeletedDigit(String barcode){
         return ' ';
+    }
+    
+    private static boolean isNumber(String str){
+        boolean result=true;
+        if(str!=null){
+            int i=0;
+            while(i<str.length()&&result){
+                if(!Character.isDigit(str.charAt(i))){
+                    result=false;
+                }
+                i++;
+            }
+        }
+        return result;
     }
 }

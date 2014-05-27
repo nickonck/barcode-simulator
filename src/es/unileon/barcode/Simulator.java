@@ -19,14 +19,17 @@ public class Simulator {
     }
     
     public String getBarcode(){
+        //TODO
         return null;
     }
     
     public String getBarcodeWithDeletedDigit(){
+        //TODO
         return null;
     }
     
     public String getBarcodeWithChangedDigit(){
+        //TODO
         return null;
     }
 
