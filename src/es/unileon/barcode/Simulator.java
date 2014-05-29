@@ -19,8 +19,12 @@ public class Simulator {
     }
     
     public String getBarcode(){
-        //TODO
-        return null;
+        String result="";
+        for(int i=0; i<12;i++){
+            result+=Integer.toString(new Double(Math.random()*9).intValue());
+        }
+        result+=BarcodeEANFunctions.getControlDigit(result);
+        return result;
     }
     
     public String getBarcodeWithDeletedDigit(){

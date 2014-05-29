@@ -44,4 +44,29 @@ public class BarcodeFunctionsTests {
         barcode="8410199140401";
         assertTrue(BarcodeEANFunctions.isSecuenceValid(barcode));
     }
+    
+    @Test(expected=InvalidBarcodeException.class)
+    public void isSecuenceValidEsxceptionTest() throws InvalidBarcodeException{
+        String barcode="hola";
+        BarcodeEANFunctions.isSecuenceValid(barcode);
+    }
+    
+    @Test
+    public void calculateDeletedDigitTest() throws InvalidBarcodeException{
+        String barcode="59012341X3457";
+        assertEquals('2',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        barcode="00X0000000000";
+        assertEquals('0',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        barcode="9999X99999994";
+        assertEquals('9',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        barcode="8X10199140401";
+        assertEquals('4',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+    }
+    
+    @Test(expected=InvalidBarcodeException.class)
+     public void calculateDeletedDigitExceptionTest() throws InvalidBarcodeException{
+        String barcode="590X2341X3457";
+        assertEquals('2',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+     }
+    
 }
