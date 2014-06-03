@@ -70,8 +70,7 @@ public class BarcodeEANFunctions {
            if(failPosition!=-1){
             int res=0;
             if((failPosition+1)%2==0){
-                res = (-control%10+10)%10;
-                res= (10-(res/3))%10;
+                res= ((10 +(-control*7))%10+10)%10;
                 System.out.println(control);
             }else{
                 res = control%10;

@@ -13,9 +13,14 @@ package es.unileon.barcode;
 public class Simulator {
     
     private int errorProbability;
+    private static int DEFAULT_PROBABILITY=10;
     
     public Simulator(){
+        this.errorProbability=DEFAULT_PROBABILITY;
+    }
     
+    public Simulator(int errorProbability){
+        this.errorProbability=errorProbability;
     }
     
     public String getBarcode(){
@@ -27,9 +32,24 @@ public class Simulator {
         return result;
     }
     
+    /**
+     * We use a maximum of 3 errors
+     * @return 
+     */
     public String getBarcodeWithDeletedDigit(){
-        //TODO
-        return null;
+        StringBuilder result=new StringBuilder(this.getBarcode());
+        int posRandom=Math.round(new Double(Math.random()*11).floatValue());
+        System.out.println("barcode: " + result.toString());
+        result.setCharAt(posRandom, 'X');
+        int moreErrorProbability= Math.round(new Double(Math.random()*100).floatValue());
+        if(moreErrorProbability<errorProbability){
+            int errors=Math.round(new Double(Math.random()*2).floatValue());
+            for(int i=0; i<errors+1; i++){
+                posRandom=Math.round(new Double(Math.random()*11).floatValue());
+                result.setCharAt(posRandom, 'X');
+            }
+        }
+        return result.toString();
     }
     
     public String getBarcodeWithChangedDigit(){

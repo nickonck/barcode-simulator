@@ -82,4 +82,20 @@ public class SimulatorTests {
         assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
         assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
     }
+    
+    @Test
+    public void getBarcodeWithDeletedDigitTest(){
+       // simulator.setErrorProbability(100);
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit());
+    }
 }
