@@ -53,8 +53,19 @@ public class Simulator {
     }
     
     public String getBarcodeWithChangedDigit(){
-        //TODO
-        return null;
+        StringBuilder barcode=new StringBuilder(this.getBarcode());
+        StringBuilder newBarcode = barcode;
+        int randomPos = (int)(Math.random()*13);
+        char number = barcode.charAt(randomPos);
+        char nextNumber = barcode.charAt(randomPos+1);
+        System.out.println("Barcode Original: "+ barcode.toString());
+        System.out.println("Posicion aleatoria: "+ number);
+        System.out.println("Posicion siguiente: "+ nextNumber);
+        
+        newBarcode.setCharAt(randomPos, nextNumber);
+        newBarcode.setCharAt(randomPos+1, number);
+       System.out.println("Barcode Nuevo: "+ newBarcode.toString());
+        return newBarcode.toString();
     }
 
     public int getErrorProbability() {
