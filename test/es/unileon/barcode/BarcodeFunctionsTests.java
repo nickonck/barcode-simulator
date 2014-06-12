@@ -6,6 +6,7 @@
 
 package es.unileon.barcode;
 
+import es.unileon.barcode.exception.InvalidBarcodeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;

@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package es.unileon.barcode;
+package es.unileon.barcode.exception;
 
 /**
  *
  * @author Gonzalo
  */
-class InvalidBarcodeException extends Exception {
+public class InvalidBarcodeException extends Exception {
     
 }

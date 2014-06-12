@@ -6,6 +6,8 @@
 
 package es.unileon.barcode;
 
+import es.unileon.barcode.exception.InvalidBarcodeException;
+
 /**
  *
  * @author Gonzalo

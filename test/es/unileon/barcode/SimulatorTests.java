@@ -6,6 +6,7 @@
 
 package es.unileon.barcode;
 
+import es.unileon.barcode.exception.InvalidBarcodeException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -86,16 +87,16 @@ public class SimulatorTests {
     @Test
     public void getBarcodeWithDeletedDigitTest(){
        // simulator.setErrorProbability(100);
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
-        System.out.println(simulator.getBarcodeWithDeletedDigit());
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
+        System.out.println(simulator.getBarcodeWithDeletedDigit(simulator.getBarcode()));
     }
 }
