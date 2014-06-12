@@ -12,9 +12,9 @@ import es.unileon.barcode.exception.InvalidBarcodeException;
  *
  * @author Gonzalo
  */
-public class BarcodeEANFunctions {
+public class BarcodeEAN {
     
-    public static char getControlDigit(String barcode){
+    public char getControlDigit(String barcode){
         int result=0;
         for(int i=0; i<barcode.length(); i++){
             if((i+1)%2==0){
@@ -29,7 +29,7 @@ public class BarcodeEANFunctions {
         return Integer.toString(result).charAt(0);
     }
     
-    public static boolean isSecuenceValid(String barcode) throws InvalidBarcodeException{
+    public boolean isSecuenceValid(String barcode) throws InvalidBarcodeException{
         boolean result= false;
         if(!isNumber(barcode)){
             throw new InvalidBarcodeException();
@@ -49,7 +49,7 @@ public class BarcodeEANFunctions {
         return result;
     }
     
-    public static char calculateDeletedDigit(String barcode) throws InvalidBarcodeException{
+    public char calculateDeletedDigit(String barcode) throws InvalidBarcodeException{
         // Solve to pair position
         char result = 'X';
         int failPosition=-1;
@@ -85,7 +85,7 @@ public class BarcodeEANFunctions {
         return result;
     }
     
-    private static boolean isNumber(String str){
+    private boolean isNumber(String str){
         boolean result=true;
         if(str!=null){
             int i=0;
@@ -99,7 +99,7 @@ public class BarcodeEANFunctions {
         return result;
     }
     
-    private static int getNumberOfChars(String str){
+    private int getNumberOfChars(String str){
         int result=0;
         if(str!=null){
             int i=0;

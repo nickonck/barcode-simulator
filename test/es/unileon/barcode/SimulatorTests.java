@@ -17,71 +17,78 @@ import static org.junit.Assert.*;
  */
 public class SimulatorTests {
     
+    private BarcodeEAN barcodeEAN;
     private Simulator simulator;
     
     @Before
     public void setUp() {
+        barcodeEAN = new BarcodeEAN();
         simulator = new Simulator();
     }
 
     
     @Test
     public void getBarcodeTest() throws InvalidBarcodeException {
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
+        assertTrue(barcodeEAN.isSecuenceValid(simulator.getBarcode()));
     }
     
     @Test

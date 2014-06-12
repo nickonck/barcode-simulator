@@ -16,7 +16,7 @@ public class Simulator {
     private int errorProbability;
     
     private static int DEFAULT_PROBABILITY=10;
-    private static int DEFAULT_BARCODE_LENGHT=12;
+    private static int DEFAULT_BARCODE_LENGHT=13;
     
     public Simulator(){
         this.errorProbability=DEFAULT_PROBABILITY;
@@ -30,15 +30,17 @@ public class Simulator {
     
     public String getBarcode(){
         String result="";
-        for(int i=0; i<barcodeLenght;i++){
+        for(int i=0; i<barcodeLenght-1;i++){
             result+=Integer.toString(new Double(Math.random()*9).intValue());
         }
-        result+=BarcodeEANFunctions.getControlDigit(result);
+        BarcodeEAN barcodeEAN = new BarcodeEAN();
+        result+=barcodeEAN.getControlDigit(result);
         return result;
     }
     
     /**
      * We use a maximum of 3 errors
+     * @param EANBarcode
      * @return 
      */
     public String getBarcodeWithDeletedDigit(String EANBarcode){

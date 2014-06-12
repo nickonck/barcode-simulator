@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -18,62 +19,68 @@ import static org.junit.Assert.*;
  */
 public class BarcodeFunctionsTests {
     
+    private BarcodeEAN barcodeEAN;
+    
+    @Before
+    public void setUp(){
+        barcodeEAN = new BarcodeEAN();
+    }
     
     @Test
     public void getControlDigitTest() {
         String barcode="590123412345";
-        assertEquals(BarcodeEANFunctions.getControlDigit(barcode), '7');
+        assertEquals(barcodeEAN.getControlDigit(barcode), '7');
     
         barcode="000000000000";
-        assertEquals(BarcodeEANFunctions.getControlDigit(barcode), '0');
+        assertEquals(barcodeEAN.getControlDigit(barcode), '0');
     
         barcode="999999999999";
-        assertEquals(BarcodeEANFunctions.getControlDigit(barcode), '4');
+        assertEquals(barcodeEAN.getControlDigit(barcode), '4');
     
         barcode="841019914040";
-        assertEquals(BarcodeEANFunctions.getControlDigit(barcode), '1');
+        assertEquals(barcodeEAN.getControlDigit(barcode), '1');
     }
     
     @Test
     public void isSecuenceValidTest() throws InvalidBarcodeException{
         String barcode="5901234123457";
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(barcode));
+        assertTrue(barcodeEAN.isSecuenceValid(barcode));
         barcode="0000000000000";
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(barcode));
+        assertTrue(barcodeEAN.isSecuenceValid(barcode));
         barcode="9999999999994";
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(barcode));
+        assertTrue(barcodeEAN.isSecuenceValid(barcode));
         barcode="8412600051016";
-        assertTrue(BarcodeEANFunctions.isSecuenceValid(barcode));
+        assertTrue(barcodeEAN.isSecuenceValid(barcode));
     }
     
     @Test(expected=InvalidBarcodeException.class)
     public void isSecuenceValidEsxceptionTest() throws InvalidBarcodeException{
         String barcode="hola";
-        BarcodeEANFunctions.isSecuenceValid(barcode);
+        barcodeEAN.isSecuenceValid(barcode);
     }
     
     @Test
     public void calculateDeletedDigitTest() throws InvalidBarcodeException{
         String barcode="59012341X3457";
-        assertEquals('2',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('2',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="00X0000000000";
-        assertEquals('0',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="9999X99999994";
-        assertEquals('9',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('9',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="841X199140401";
-        assertEquals('0',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="84101X9140401";
-        assertEquals('9',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('9',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="8410199X40401";
-        assertEquals('1',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('1',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="841019914X401";
-        assertEquals('0',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
     }
     
     @Test(expected=InvalidBarcodeException.class)
      public void calculateDeletedDigitExceptionTest() throws InvalidBarcodeException{
         String barcode="590X2341X3457";
-        assertEquals('2',BarcodeEANFunctions.calculateDeletedDigit(barcode));
+        assertEquals('2',barcodeEAN.calculateDeletedDigit(barcode));
      }
     
 }
