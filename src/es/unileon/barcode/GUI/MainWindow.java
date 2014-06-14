@@ -41,12 +41,11 @@ public class MainWindow extends JFrame{
     
     public MainWindow(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(700, 500);
-        this.setVisible(true);
+        
         borderLayout = new BorderLayout();
         this.getContentPane().setLayout(borderLayout);
         menuBar = new JMenuBar();
-        this.add(menuBar, BorderLayout.NORTH);
+        this.getContentPane().add(menuBar, BorderLayout.NORTH);
         dataMenu = new JMenu("Datos");
         menuBar.add(dataMenu);
         setPercentage = new JMenuItem("Probabilidad de error");
@@ -72,6 +71,9 @@ public class MainWindow extends JFrame{
         consts.gridwidth=GridBagConstraints.RELATIVE;
         barcodeResult = new JTextField("result");
         textPanel.add(barcodeResult,consts);
+        
+        this.setSize(700, 500);
+        this.setVisible(true);
     }
     
 }
