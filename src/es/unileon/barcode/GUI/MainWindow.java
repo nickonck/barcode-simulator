@@ -7,6 +7,7 @@
 package es.unileon.barcode.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +31,8 @@ public class MainWindow extends JFrame{
     private JMenuItem setBarcodeLength;
     
     private JPanel textPanel;
-    private JTextField barcode;
+    private JTextField barcodeGenerated;
+    private JTextField barcodeResult;
     
     private JPanel buttonPanel;
     private JButton generateValidBarcode;
@@ -38,10 +40,11 @@ public class MainWindow extends JFrame{
     private JButton generateBarcodeChangedDigit;
     
     public MainWindow(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(700, 500);
         this.setVisible(true);
         borderLayout = new BorderLayout();
-        this.setLayout(borderLayout);
+        this.getContentPane().setLayout(borderLayout);
         menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
         dataMenu = new JMenu("Datos");
@@ -56,13 +59,19 @@ public class MainWindow extends JFrame{
         
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
+        GridBagConstraints consts = new GridBagConstraints();
         
-        this.add(textPanel, BorderLayout.WEST);
-        this.add(buttonPanel, BorderLayout.EAST);
+        consts.gridwidth=GridBagConstraints.REMAINDER;
+        consts.fill=GridBagConstraints.HORIZONTAL;
+        consts.anchor=GridBagConstraints.CENTER;
+        this.getContentPane().add(textPanel, BorderLayout.WEST);
+        this.getContentPane().add(buttonPanel, BorderLayout.EAST);
         
-        barcode = new JTextField();
-        barcode.setText(this.getHeight() + "X" + this.getWidth());
-        textPanel.add(barcode);
+        barcodeGenerated = new JTextField("barcode");
+        textPanel.add(barcodeGenerated,consts);
+        consts.gridwidth=GridBagConstraints.RELATIVE;
+        barcodeResult = new JTextField("result");
+        textPanel.add(barcodeResult,consts);
     }
     
 }
