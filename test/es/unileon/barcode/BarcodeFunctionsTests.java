@@ -65,16 +65,36 @@ public class BarcodeFunctionsTests {
         assertEquals('2',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="00X0000000000";
         assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="0X00000000000";
+        assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="9999X99999994";
         assertEquals('9',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="X410199140401";
+        assertEquals('8',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="8X10199140401";
+        assertEquals('4',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="84X0199140401";
+        assertEquals('1',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="841X199140401";
         assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="8410X99140401";
+        assertEquals('1',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="84101X9140401";
+        assertEquals('9',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="841019X140401";
         assertEquals('9',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="8410199X40401";
         assertEquals('1',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="84101991X0401";
+        assertEquals('4',barcodeEAN.calculateDeletedDigit(barcode));
         barcode="841019914X401";
         assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="8410199140X01";
+        assertEquals('4',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="84101991404X1";
+        assertEquals('0',barcodeEAN.calculateDeletedDigit(barcode));
+        barcode="841019914040X";
+        assertEquals('1',barcodeEAN.calculateDeletedDigit(barcode));
     }
     
     @Test(expected=InvalidBarcodeException.class)

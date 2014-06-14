@@ -12,25 +12,25 @@ package es.unileon.barcode;
  */
 public class Simulator {
     
-    private int barcodeLenght;
+    private int barcodeLength;
     private int errorProbability;
     
-    private static int DEFAULT_PROBABILITY=10;
-    private static int DEFAULT_BARCODE_LENGHT=13;
+    private static final int DEFAULT_PROBABILITY=10;
+    private static final int DEFAULT_BARCODE_LENGTH=13;
     
     public Simulator(){
         this.errorProbability=DEFAULT_PROBABILITY;
-        this.barcodeLenght=DEFAULT_BARCODE_LENGHT;
+        this.barcodeLength=DEFAULT_BARCODE_LENGTH;
     }
     
     public Simulator(int errorProbability, int barcodeLength){
         this.errorProbability=errorProbability;
-        this.barcodeLenght=barcodeLength;
+        this.barcodeLength=barcodeLength;
     }
     
     public String getBarcode(){
         String result="";
-        for(int i=0; i<barcodeLenght-1;i++){
+        for(int i=0; i<barcodeLength-1;i++){
             result+=Integer.toString(new Double(Math.random()*9).intValue());
         }
         BarcodeEAN barcodeEAN = new BarcodeEAN();
@@ -45,14 +45,14 @@ public class Simulator {
      */
     public String getBarcodeWithDeletedDigit(String EANBarcode){
         StringBuilder result=new StringBuilder(EANBarcode);
-        int posRandom=Math.round(new Double(Math.random()*11).floatValue());
+        int posRandom=Math.abs(Math.round(new Double(Math.random()*barcodeLength-1).floatValue()));
         System.out.println("barcode: " + result.toString());
         result.setCharAt(posRandom, 'X');
         int moreErrorProbability= Math.round(new Double(Math.random()*100).floatValue());
         if(moreErrorProbability < errorProbability){
             int errors=Math.round(new Double(Math.random()*2).floatValue());
             for(int i=0; i<errors+1; i++){
-                posRandom=Math.round(new Double(Math.random()*barcodeLenght).floatValue());
+                posRandom=Math.round(new Double(Math.random()*barcodeLength).floatValue());
                 result.setCharAt(posRandom, 'X');
             }
         }
@@ -62,7 +62,7 @@ public class Simulator {
     public String getBarcodeWithChangedDigit(String EANBarcode){
         StringBuilder barcode=new StringBuilder(EANBarcode);
         StringBuilder newBarcode = barcode;
-        int randomPos = (int)(Math.random()*barcodeLenght);
+        int randomPos = (int)(Math.random()*barcodeLength);
         char number = barcode.charAt(randomPos);
         char nextNumber = barcode.charAt(randomPos+1);
         System.out.println("Barcode Original: "+ barcode.toString());
@@ -84,11 +84,11 @@ public class Simulator {
     }
 
     public int getBarcodeLenght() {
-        return barcodeLenght;
+        return barcodeLength;
     }
 
     public void setBarcodeLenght(int barcodeLenght) {
-        this.barcodeLenght = barcodeLenght;
+        this.barcodeLength = barcodeLenght;
     }
     
     

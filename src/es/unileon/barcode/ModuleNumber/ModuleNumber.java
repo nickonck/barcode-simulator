@@ -12,4 +12,16 @@ package es.unileon.barcode.ModuleNumber;
  */
 public class ModuleNumber {
     
+    public static int getIntegerInModule(int number, int mod){
+        return number%mod;
+    }
+    
+    public static int getFractionInModule(int numerator, int denominator, int mod){
+        return (numerator * getInverse(denominator,mod))%mod;
+    }
+    
+    private static int getInverse(int number, int mod){
+        return (mod-(number%mod)+mod)%mod;
+    
+    }
 }
