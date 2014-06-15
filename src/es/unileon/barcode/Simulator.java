@@ -46,14 +46,16 @@ public class Simulator {
     public String getBarcodeWithDeletedDigit(String EANBarcode){
         StringBuilder result=new StringBuilder(EANBarcode);
         int posRandom=Math.abs(Math.round(new Double(Math.random()*barcodeLength-1).floatValue()));
-        System.out.println("barcode: " + result.toString());
         result.setCharAt(posRandom, 'X');
         int moreErrorProbability= Math.round(new Double(Math.random()*100).floatValue());
-        if(moreErrorProbability < errorProbability){
+        if(moreErrorProbability <= errorProbability){
             int errors=(int) Math.floor(Math.random()*(4-2+1)+2);
             for(int i=1; i<errors; i++){
                 posRandom=Math.round(new Double(Math.random()*(barcodeLength-1)).floatValue());
-                result.setCharAt(posRandom, 'X');
+                if(result.charAt(posRandom)!='X')
+                    result.setCharAt(posRandom, 'X');
+                else
+                    i--;
             }
         }
         return result.toString();
@@ -65,13 +67,8 @@ public class Simulator {
         int randomPos = (int)(Math.random()*(barcodeLength-1));
         char number = barcode.charAt(randomPos);
             char nextNumber = barcode.charAt(randomPos+1);
-            System.out.println("Barcode Original: "+ barcode.toString());
-            System.out.println("Posicion aleatoria: "+ number);
-            System.out.println("Posicion siguiente: "+ nextNumber);
-        
             newBarcode.setCharAt(randomPos, nextNumber);
             newBarcode.setCharAt(randomPos+1, number);
-            System.out.println("Barcode Nuevo: "+ newBarcode.toString());
             return newBarcode.toString();
     }
 

@@ -86,14 +86,12 @@ public class BarcodeEAN {
             int res=0;
             if((failPosition+1)%2==0){
                 res= ModuleNumber.getIntegerInModule((MODULE_BARCODE -(ModuleNumber.getFractionInModule(control, MULTIPLY_FACTOR, MODULE_BARCODE))),MODULE_BARCODE);
-                System.out.println(control);
             }else{
                 res = ModuleNumber.getIntegerInModule(MODULE_BARCODE-ModuleNumber.getIntegerInModule(control, MODULE_BARCODE),MODULE_BARCODE);
             }
                 result=Integer.toString(res).charAt(0);
             }
         }
-        System.out.println("Missed: "+result);
         return result;
     }
     public int getDeletedPosition(String barcode) throws InvalidBarcodeException{

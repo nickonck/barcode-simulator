@@ -12,12 +12,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,6 +73,8 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         this.setTitle("BARCODE SIMULATOR");
+        URL urlicon = getClass().getClassLoader().getResource("icon.jpg");
+        
         currentFrame = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -105,12 +111,14 @@ public class MainWindow extends JFrame {
         this.getContentPane().add(buttonPanel, BorderLayout.EAST);
 
         //IMAGENES
-        iconCorrect = new ImageIcon("images/correcto.png");
-        iconIncorrect = new ImageIcon("images/incorrecto.png");
-        iconEmpty = new ImageIcon("images/empty.png");
+        URL urlcorrect = getClass().getClassLoader().getResource("correcto.png");
+        URL urlincorrect = getClass().getClassLoader().getResource("incorrecto.png");
+        URL urlempty = getClass().getClassLoader().getResource("empty.png");
+        iconCorrect = new ImageIcon(urlcorrect);
+        iconIncorrect = new ImageIcon(urlincorrect);
+        iconEmpty = new ImageIcon(urlempty);
 
-        File file = new File("images/correcto.png");
-        System.out.println(file.exists());
+        File file = new File("Images/correcto.png");
         iconGenerated = new JLabel(iconEmpty);
         iconResult = new JLabel(iconEmpty);
 
@@ -184,7 +192,6 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 checkButton.setEnabled(true);
                 barcodeGenerated.setText(simulator.getBarcode());
-                System.out.println("texto añadido");
                 iconGenerated.setIcon(iconEmpty);
                 iconResult.setIcon(iconEmpty);
                 barcodeGenerated.setEditable(false);
@@ -238,11 +245,9 @@ public class MainWindow extends JFrame {
                 checkButton.setEnabled(false);
                 try {
                     if (barcodeEan.isSecuenceValid(barcodeGenerated.getText())) {
-                        System.out.println("Es correcto");
                         iconGenerated.setIcon(iconCorrect);
 
                     } else {
-                        System.out.println("No es correcto");
                         iconGenerated.setIcon(iconIncorrect);
                     }
 
@@ -256,7 +261,6 @@ public class MainWindow extends JFrame {
                     try {
                         barcode.setCharAt(barcodeEan.getDeletedPosition(barcodeGenerated.getText()), barcodeEan.calculateDeletedDigit(barcodeGenerated.getText()));
                         barcodeResult.setText(barcode.toString());
-                        System.out.println("El borrado esta solucionado");
                         deletedDigit.setText("El numero borrado era: " + String.valueOf(barcodeEan.calculateDeletedDigit(barcodeGenerated.getText())));
 
                          try {
@@ -310,9 +314,16 @@ public class MainWindow extends JFrame {
                 percentage = Integer.parseInt(percent);      
             }
         });
-
+        try {
+            Image image = ImageIO.read( getClass().getResource("/icon.jpg"));
+            currentFrame.setIconImage(image);
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         this.setSize(700, 500);
-
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.setVisible(
                 true);
     }
