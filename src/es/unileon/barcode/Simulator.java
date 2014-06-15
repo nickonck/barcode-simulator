@@ -50,9 +50,9 @@ public class Simulator {
         result.setCharAt(posRandom, 'X');
         int moreErrorProbability= Math.round(new Double(Math.random()*100).floatValue());
         if(moreErrorProbability < errorProbability){
-            int errors=Math.round(new Double(Math.random()*2).floatValue());
-            for(int i=0; i<errors+1; i++){
-                posRandom=Math.round(new Double(Math.random()*barcodeLength).floatValue());
+            int errors=(int) Math.floor(Math.random()*(4-2+1)+2);
+            for(int i=1; i<errors; i++){
+                posRandom=Math.round(new Double(Math.random()*(barcodeLength-1)).floatValue());
                 result.setCharAt(posRandom, 'X');
             }
         }
@@ -62,17 +62,17 @@ public class Simulator {
     public String getBarcodeWithChangedDigit(String EANBarcode){
         StringBuilder barcode=new StringBuilder(EANBarcode);
         StringBuilder newBarcode = barcode;
-        int randomPos = (int)(Math.random()*barcodeLength);
+        int randomPos = (int)(Math.random()*(barcodeLength-1));
         char number = barcode.charAt(randomPos);
-        char nextNumber = barcode.charAt(randomPos+1);
-        System.out.println("Barcode Original: "+ barcode.toString());
-        System.out.println("Posicion aleatoria: "+ number);
-        System.out.println("Posicion siguiente: "+ nextNumber);
+            char nextNumber = barcode.charAt(randomPos+1);
+            System.out.println("Barcode Original: "+ barcode.toString());
+            System.out.println("Posicion aleatoria: "+ number);
+            System.out.println("Posicion siguiente: "+ nextNumber);
         
-        newBarcode.setCharAt(randomPos, nextNumber);
-        newBarcode.setCharAt(randomPos+1, number);
-       System.out.println("Barcode Nuevo: "+ newBarcode.toString());
-        return newBarcode.toString();
+            newBarcode.setCharAt(randomPos, nextNumber);
+            newBarcode.setCharAt(randomPos+1, number);
+            System.out.println("Barcode Nuevo: "+ newBarcode.toString());
+            return newBarcode.toString();
     }
 
     public int getErrorProbability() {
@@ -86,10 +86,4 @@ public class Simulator {
     public int getBarcodeLenght() {
         return barcodeLength;
     }
-
-    public void setBarcodeLenght(int barcodeLenght) {
-        this.barcodeLength = barcodeLenght;
-    }
-    
-    
 }

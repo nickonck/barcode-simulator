@@ -143,8 +143,5 @@ public class BarcodeEAN {
         return barcodeLength;
     }
 
-    public void setBarcodeLength(int barcodeLength) {
-        this.barcodeLength = barcodeLength;
-    }
    
 }
