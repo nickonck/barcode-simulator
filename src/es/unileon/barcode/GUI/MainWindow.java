@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -144,6 +146,14 @@ public class MainWindow extends JFrame {
         consts.gridx = 2;
         consts.gridy = 3;
         buttonPanel.add(checkButton, consts);
+        
+        generateValidBarcode.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
 
         this.setSize(700, 500);
         this.setVisible(true);
