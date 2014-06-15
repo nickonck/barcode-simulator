@@ -96,6 +96,20 @@ public class BarcodeEAN {
         System.out.println("Missed: "+result);
         return result;
     }
+    public int getDeletedPosition(String barcode) throws InvalidBarcodeException{
+        int result=-1;
+        if(getNumberOfChars(barcode)!=1){
+            throw new InvalidBarcodeException();
+        }
+        int i=0;
+        while(i<barcode.length() && result==-1){
+            if(Character.isLetter(barcode.charAt(i))){
+                result=i;
+            }
+            i++;
+        }
+        return result;
+    }
     
     private boolean isNumber(String str){
         boolean result=true;
