@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -24,7 +25,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -34,40 +34,45 @@ import javax.swing.JTextField;
  */
 public class MainWindow extends JFrame {
 
+    private JFrame currentFrame;
+
     private BorderLayout borderLayout;
 
-    private JMenuBar menuBar;
-    private JMenu dataMenu;
-    private JMenuItem setPercentage;
-    private JMenuItem setBarcodeLength;
+    private final JMenuBar menuBar;
+    private final JMenu dataMenu;
+    private final JMenuItem setPercentage;
+    private final JMenuItem setBarcodeLength;
 
-    private JLabel correctGenerated;
-    private JLabel incorrectGenerated;
-    private JLabel correctResult;
-    private JLabel incorrectResult;
-    private JLabel empty;
+    private JLabel iconGenerated;
+    private JLabel iconResult;
+
     private JLabel deletedDigit;
 
-    private JPanel textPanel;
+    private final JPanel textPanel;
     private JTextField barcodeGenerated;
     private JTextField barcodeResult;
 
-    private JPanel buttonPanel;
-    private JButton generateValidBarcode;
-    private JButton generateBarcodeDeletedDigit;
-    private JButton generateBarcodeChangedDigit;
-    private JButton checkButton;
+    private final JPanel buttonPanel;
+    private final JButton generateValidBarcode;
+    private final JButton generateBarcodeDeletedDigit;
+    private final JButton generateBarcodeChangedDigit;
+    private final JButton checkButton;
+
+    private final ImageIcon iconCorrect;
+    private final ImageIcon iconIncorrect;
+    private final ImageIcon iconEmpty;
 
     private final Simulator simulator = new Simulator();
     private final BarcodeEAN barcodeEan = new BarcodeEAN();
 
     public MainWindow() {
+        currentFrame = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         borderLayout = new BorderLayout();
         this.getContentPane().setLayout(borderLayout);
-
         deletedDigit = new JLabel();
+
         //MENU
         menuBar = new JMenuBar();
         this.getContentPane().add(menuBar, BorderLayout.NORTH);
@@ -87,117 +92,109 @@ public class MainWindow extends JFrame {
         buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);
         buttonPanel.setLayout(new GridBagLayout());
-        GridBagConstraints consts = new GridBagConstraints();
+        GridBagConstraints constsLeft = new GridBagConstraints();
+        GridBagConstraints constsRight = new GridBagConstraints();
 
         //Situacion de los paneles
-        consts.gridwidth = GridBagConstraints.REMAINDER;
-        consts.fill = GridBagConstraints.HORIZONTAL;
-        consts.anchor = GridBagConstraints.CENTER;
+        constsLeft.gridwidth = GridBagConstraints.REMAINDER;
+        constsLeft.fill = GridBagConstraints.HORIZONTAL;
+        constsLeft.anchor = GridBagConstraints.CENTER;
         this.getContentPane().add(textPanel, BorderLayout.CENTER);
         this.getContentPane().add(buttonPanel, BorderLayout.EAST);
 
         //IMAGENES
-        ImageIcon iconCorrect = new ImageIcon("images/correcto.png");
-        ImageIcon iconIncorrect = new ImageIcon("images/incorrecto.png");
-        ImageIcon iconVoid = new ImageIcon();
-        correctGenerated = new JLabel(iconCorrect);
-        incorrectGenerated = new JLabel(iconIncorrect);
+        iconCorrect = new ImageIcon("images/correcto.png");
+        iconIncorrect = new ImageIcon("images/incorrecto.png");
+        iconEmpty = new ImageIcon("images/empty.png");
 
-        correctResult = new JLabel(iconCorrect);
-        incorrectResult = new JLabel(iconIncorrect);
-
-        empty = new JLabel(iconVoid);
-
-        correctGenerated.setVisible(false);
-        incorrectGenerated.setVisible(false);
-        correctResult.setVisible(false);
-        incorrectResult.setVisible(false);
+        File file = new File("images/correcto.png");
+        System.out.println(file.exists());
+        iconGenerated = new JLabel(iconEmpty);
+        iconResult = new JLabel(iconEmpty);
 
         //PANEL IZQUIERDA
-        consts.gridwidth = GridBagConstraints.RELATIVE;
-        consts.insets = new Insets(10, 0, 10, 0);
-        consts.fill = GridBagConstraints.HORIZONTAL;
-        consts.ipadx = 200;
-        consts.ipady = 20;
-        consts.gridx = 2;
-        consts.gridy = 0;
+        //Cuadro barcode
+        constsLeft.gridwidth = GridBagConstraints.RELATIVE;
+        constsLeft.insets = new Insets(10, 30, 10, 0);
+        constsLeft.fill = GridBagConstraints.HORIZONTAL;
+        constsLeft.ipadx = 100;
+        constsLeft.ipady = 20;
+        constsLeft.gridx = 2;
+        constsLeft.gridy = 0;
         barcodeGenerated = new JTextField("barcode");
         barcodeGenerated.setHorizontalAlignment(JTextField.CENTER);
         barcodeGenerated.setBackground(new Color(235, 237, 237));
-        textPanel.add(barcodeGenerated, consts);
 
-        //consts.gridwidth = GridBagConstraints.REMAINDER;
-        consts.fill = GridBagConstraints.NONE;
-        consts.ipadx = 10;
+        textPanel.add(barcodeGenerated, constsLeft);
 
-        consts.gridx = 3;
-        consts.gridy = 0;
-        textPanel.add(correctGenerated, consts);
-        textPanel.add(incorrectGenerated, consts);
+        constsLeft.gridwidth = GridBagConstraints.REMAINDER;
+        constsLeft.fill = GridBagConstraints.NONE;
+        constsLeft.gridx = 3;
+        constsLeft.gridy = 0;
+        textPanel.add(iconGenerated, constsLeft);
 
-        //consts.gridwidth = GridBagConstraints.RELATIVE;
+        constsLeft.gridwidth = GridBagConstraints.RELATIVE;
         barcodeResult = new JTextField("result");
         barcodeResult.setHorizontalAlignment(JTextField.CENTER);
         barcodeResult.setBackground(new Color(235, 237, 237));
-        consts.gridwidth = GridBagConstraints.REMAINDER;
-        consts.gridx = 2;
-        consts.gridy = 1;
-        consts.fill = GridBagConstraints.HORIZONTAL;
-        consts.ipadx = 200;
+        //consts.gridwidth = GridBagConstraints.REMAINDER;
+        constsLeft.gridx = 2;
+        constsLeft.gridy = 1;
+        constsLeft.fill = GridBagConstraints.HORIZONTAL;
+        constsLeft.ipadx = 200;
 
-        textPanel.add(barcodeResult, consts);
-        consts.gridwidth = GridBagConstraints.REMAINDER;
-        consts.fill = GridBagConstraints.NONE;
-        consts.ipadx = 10;
-        consts.gridx = 3;
-        consts.gridy = 1;
-        textPanel.add(incorrectResult, consts);
-        textPanel.add(correctResult, consts);
-        consts.gridx = 2;
-        consts.gridy = 2;
-        textPanel.add(deletedDigit, consts);
+        textPanel.add(barcodeResult, constsLeft);
+
+        constsLeft.gridwidth = GridBagConstraints.REMAINDER;
+        constsLeft.fill = GridBagConstraints.NONE;
+        constsLeft.ipadx = 10;
+        constsLeft.gridx = 3;
+        constsLeft.gridy = 1;
+        textPanel.add(iconResult, constsLeft);
+
+        constsLeft.gridx = 2;
+        constsLeft.gridy = 2;
+        textPanel.add(deletedDigit, constsLeft);
 
         //PANEL DERECHA: BOTONES
         generateBarcodeChangedDigit = new JButton("Intercambio de digitos");
         generateBarcodeDeletedDigit = new JButton("Borron");
         generateValidBarcode = new JButton("Codigo de barras valido");
         checkButton = new JButton("Test");
-        consts.ipadx = 80;
-        consts.ipady = 5;
-        consts.insets = new Insets(10, 20, 10, 20);
-        consts.gridwidth = GridBagConstraints.RELATIVE;
+        constsRight.ipadx = 80;
+        constsRight.ipady = 5;
+        constsRight.insets = new Insets(10, 20, 10, 20);
+        constsRight.gridwidth = GridBagConstraints.REMAINDER;
 
-        consts.gridx = 2;
-        consts.gridy = 0;
-        buttonPanel.add(generateValidBarcode, consts);
+        //consts.gridx = 2;
+        //consts.gridy = 0;
+        buttonPanel.add(generateValidBarcode, constsRight);
 
-        consts.gridwidth = GridBagConstraints.RELATIVE;
-        consts.gridx = 2;
-        consts.gridy = 1;
-        buttonPanel.add(generateBarcodeChangedDigit, consts);
-        consts.gridwidth = GridBagConstraints.RELATIVE;
-        consts.gridx = 2;
-        consts.gridy = 2;
-        buttonPanel.add(generateBarcodeDeletedDigit, consts);
-        consts.gridwidth = GridBagConstraints.RELATIVE;
-        consts.gridx = 2;
-        consts.gridy = 3;
-        buttonPanel.add(checkButton, consts);
+        //consts.gridwidth = GridBagConstraints.RELATIVE;
+        //consts.gridx = 2;
+        //consts.gridy = 1;
+        buttonPanel.add(generateBarcodeChangedDigit, constsRight);
+        //consts.gridwidth = GridBagConstraints.RELATIVE;
+        //consts.gridx = 2;
+        //consts.gridy = 2;
+        buttonPanel.add(generateBarcodeDeletedDigit, constsRight);
+        //consts.gridwidth = GridBagConstraints.RELATIVE;
+        //consts.gridx = 2;
+        //consts.gridy = 3;
+        buttonPanel.add(checkButton, constsRight);
 
         //CODIGO DE BARRAS VALIDO
         generateValidBarcode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                correctGenerated.setVisible(false);
-                incorrectGenerated.setVisible(false);
-                correctResult.setVisible(false);
-                incorrectResult.setVisible(false);
-
                 barcodeGenerated.setText(simulator.getBarcode());
                 System.out.println("texto añadido");
+                iconGenerated.setIcon(iconEmpty);
+                iconResult.setIcon(iconEmpty);
                 barcodeGenerated.setEditable(false);
                 barcodeResult.setVisible(false);
-                deletedDigit.setVisible(false);
+                deletedDigit.setText(" ");
+                currentFrame.validate();
             }
         });
 
@@ -205,22 +202,15 @@ public class MainWindow extends JFrame {
         generateBarcodeDeletedDigit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    correctGenerated.setVisible(false);
-                    incorrectGenerated.setVisible(false);
-                    correctResult.setVisible(false);
-                    incorrectResult.setVisible(false);
+                iconGenerated.setIcon(iconEmpty);
+                iconResult.setIcon(iconEmpty);
+                barcodeResult.setVisible(true);
 
-                    deletedDigit.setVisible(false);
-                    barcodeResult.setVisible(true);
-                    String originalBarcode = simulator.getBarcode();
-                    barcodeGenerated.setText(simulator.getBarcodeWithDeletedDigit(originalBarcode));
-                    deletedDigit.setVisible(true);
-                    barcodeResult.setText(originalBarcode);
-                    deletedDigit.setText("El numero borrado era: " + String.valueOf(barcodeEan.calculateDeletedDigit(barcodeGenerated.getText())));
-                } catch (InvalidBarcodeException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                deletedDigit.setText(" ");
+                barcodeResult.setText("");
+                String originalBarcode = simulator.getBarcode();
+                barcodeGenerated.setText(simulator.getBarcodeWithDeletedDigit(originalBarcode));
+                currentFrame.validate();
 
             }
         });
@@ -230,17 +220,15 @@ public class MainWindow extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                correctGenerated.setVisible(false);
-                incorrectGenerated.setVisible(false);
-                correctResult.setVisible(false);
-                incorrectResult.setVisible(false);
-
-                deletedDigit.setVisible(false);
+                deletedDigit.setText(" ");
+                iconGenerated.setIcon(iconEmpty);
+                iconResult.setIcon(iconEmpty);
                 barcodeResult.setVisible(true);
                 String barcode = simulator.getBarcode();
                 barcodeGenerated.setText(barcode);
                 barcodeGenerated.setEditable(false);
                 barcodeResult.setText(simulator.getBarcodeWithChangedDigit(barcode));
+                currentFrame.validate();
             }
         });
 
@@ -248,34 +236,54 @@ public class MainWindow extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 try {
                     if (barcodeEan.isSecuenceValid(barcodeGenerated.getText())) {
-                        correctGenerated.setVisible(true);
-                        incorrectGenerated.setVisible(false);
-                    } else {
-                        incorrectGenerated.setVisible(true);
-                        correctGenerated.setVisible(false);
-                    }
-                    if (barcodeResult.isVisible()) {
-                        if (barcodeEan.isSecuenceValid(barcodeResult.getText())) {
-                            correctResult.setVisible(true);
-                            incorrectResult.setVisible(false);
-                        } else {
-                            correctResult.setVisible(false);
-                            incorrectResult.setVisible(true);
+                        System.out.println("Es correcto");
+                        iconGenerated.setIcon(iconCorrect);
 
-                        }
+                    } else {
+                        System.out.println("No es correcto");
+                        iconGenerated.setIcon(iconIncorrect);
                     }
+
                 } catch (InvalidBarcodeException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "ERROR");
+                    iconGenerated.setIcon(iconIncorrect);
                 }
+
+                if (barcodeResult.isVisible() && (barcodeResult.getText().compareTo("") == 0)) {
+                    barcodeResult.setVisible(true);
+                    StringBuilder barcode = new StringBuilder(barcodeGenerated.getText());
+                    try {
+                        barcode.setCharAt(barcodeEan.getDeletedPosition(barcodeGenerated.getText()), barcodeEan.calculateDeletedDigit(barcodeGenerated.getText()));
+                    } catch (InvalidBarcodeException ex) {
+                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    barcodeResult.setText(barcode.toString());
+                    System.out.println("El borrado esta solucionado");
+                    try {
+                        deletedDigit.setText("El numero borrado era: " + String.valueOf(barcodeEan.calculateDeletedDigit(barcodeGenerated.getText())));
+                    } catch (InvalidBarcodeException ex) {
+                        Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println("Es visible");
+                    try {
+                        if (barcodeEan.isSecuenceValid(barcodeResult.getText())) {
+                            iconResult.setIcon(iconCorrect);
+                        } else {
+                            iconResult.setIcon(iconIncorrect);
+                        }
+                    } catch (InvalidBarcodeException ex) {
+                        iconResult.setIcon(iconIncorrect);
+                    }
+                }
+                currentFrame.validate();
             }
         }
         );
 
-        this.setSize(
-                700, 500);
+        this.setSize(700, 500);
 
         this.setVisible(
                 true);
